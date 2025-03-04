@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'KPkm25/my-flask-app:latest'
+        DOCKER_IMAGE = 'kpkm25/my-flask-app:latest'
     }
 
     stages {
@@ -20,7 +20,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withDockerRegistry([credentialsId: '083a4203-6203-45dd-b391-878a81e66d6c', url: 'https://index.docker.io/v1/']) {
+                withDockerRegistry([credentialsId: 'docker-creds', url: 'https://index.docker.io/v1/']) {
                     sh 'docker push $DOCKER_IMAGE'
                 }
             }
